@@ -1,0 +1,812 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<div id="app" class="row">
+  <div class="preview col-lg-6" id="preview" :class="`config_${shoes_no}`">
+    <img
+      :src="`https://www.sauvereign.com/wp-content/uploads/2022/11/${shoes}_Personalisation_Empty${striped ? '_Stripe_Web.png' : '_Web-scaled.jpg'}`"
+    />
+    <div class="content-left">
+      <img
+        v-if="!shoe_config.left.initial && shoe_config.left.image"
+        :src="`https://www.sauvereign.com/wp-content/uploads/2022/11/pic-${shoe_config.left.image}-${shoes_no == 1 ? 'red' : 'white'}.png`"
+      />
+      <img
+        class="letters-text"
+        v-if="shoe_config.left.initial"
+        :src="shoe_config.left.initial && `https://www.sauvereign.com/wp-content/uploads/2022/10/letter_${shoe_config.left.initial.charAt(0).toLowerCase()}_${shoes_no == 1 ? 'red' : 'white'}.png`"
+      />
+    </div>
+    <!-- right shoe content -->
+    <div class="content-right">
+        <!-- emoji -->
+      <img
+        v-if="!shoe_config.right.initial && shoe_config.right.image"
+        :src="`https://www.sauvereign.com/wp-content/uploads/2022/11/pic-${shoe_config.right.image}-${shoes_no == 1 ? 'red' : 'white'}.png`"
+      />
+      <!-- initial -->
+      <img
+        v-if="shoe_config.right.initial"
+        :src="shoe_config.right.initial && `https://www.sauvereign.com/wp-content/uploads/2022/10/letter_${shoe_config.right.initial.charAt(0).toLowerCase()}_${shoes_no == 1 ? 'red' : 'white'}.png`"
+      />
+      
+      
+    </div>
+    <button
+        @click="saveView"
+    >
+          Save
+        </button>
+  </div>
+
+
+  <div class="right_panel col-lg-6 pt-5">
+
+    <!-- left or right shoe selection -->
+<div class="grid-content all">
+  <div class="hand-painted">
+    <div class="selections">
+      <button
+        @click="selected_to_modify = 'left'"
+        :class="{active: selected_to_modify == 'left'}"
+      >
+        Left
+      </button>
+      <button
+        @click="selected_to_modify = 'right'"
+        :class="{active: selected_to_modify == 'right'}"
+      >
+        Right
+      </button>
+    </div>
+  </div>
+
+</div>
+<!-- left or right shoe selection -->
+
+<!-- according -->
+<div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        Initials
+      </button>
+    </h2>
+    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        <div class="grid-content all">
+    
+          <div class="grid-content paintings">
+            <div class="initials">
+              <input
+                @change="striped = true;console.log(shoe_config,'shoe config after input')"
+                @keydown="striped = true"
+                type="text"
+                placeholder="INITIALS"
+                maxlength="1"
+                v-model="shoe_config[selected_to_modify].initial"
+              />
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+        Emojis
+      </button>
+    </h2>
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        <div class="grid-content all">
+          <div class="grid-content paintings">
+            <div class="emojis">
+              <p>
+                <img
+                  @click="striped = true;  shoe_config[selected_to_modify].image = '01';console.log(shoe_config,'shoe config')"
+                  :src="`https://www.sauvereign.com/wp-content/uploads/2022/11/pic-01-${shoes_no == 1 ? 'red' : 'white'}.png`"
+                  alt="Emoji 1"
+                />
+                <img
+                  @click="striped = true; shoe_config[selected_to_modify].initial = ''; shoe_config[selected_to_modify].image = '02'; "
+                  :src="`https://www.sauvereign.com/wp-content/uploads/2022/11/pic-02-${shoes_no == 1 ? 'red' : 'white'}.png`"
+                  alt="Emoji 2"
+                />
+                <img
+                  @click="striped = true; shoe_config[selected_to_modify].initial = ''; shoe_config[selected_to_modify].image = '03'; "
+                  :src="`https://www.sauvereign.com/wp-content/uploads/2022/11/pic-03-${shoes_no == 1 ? 'red' : 'white'}.png`"
+                  alt="Emoji 3"
+                />
+                <img
+                  @click="striped = true; shoe_config[selected_to_modify].initial = ''; shoe_config[selected_to_modify].image = '04'; "
+                  :src="`https://www.sauvereign.com/wp-content/uploads/2022/11/pic-04-${shoes_no == 1 ? 'red' : 'white'}.png`"
+                  alt="Emoji 4"
+                />
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+        Special Order
+      </button>
+    </h2>
+    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        <div class="grid-content all">
+          <div class="grid-content special-order">
+            <p>
+              <img  
+                @click="striped = true; shoe_config[selected_to_modify].initial = ''; shoe_config[selected_to_modify].image = '05'; "
+                :src="`https://www.sauvereign.com/wp-content/uploads/2022/11/pic-05-${shoes_no == 1 ? 'red' : 'white'}.png`"
+                alt="Order 1" 
+              />
+              <img  
+                @click="striped = true; shoe_config[selected_to_modify].initial = ''; shoe_config[selected_to_modify].image = '06'; "
+                :src="`https://www.sauvereign.com/wp-content/uploads/2022/11/pic-06-${shoes_no == 1 ? 'red' : 'white'}.png`"
+                alt="Order 2"
+              />
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- according -->
+  </div>
+
+ 
+
+
+  <!-- <div class="grid">
+    <div class="grid-content shoes-selection">
+            <h2>ALKE</h2>
+     
+      <img
+        @click="striped = true; shoes_no = 1; shoes = 'ALKE_Jaffa-20_White_Calf_Birdseye'"
+        
+        src="http://www.sauvereign.com/wp-content/uploads/2023/08/ALKE_Jaffa-20_White_Calf_Birdseye_Personalisation_Empty_thumbnail_Web.jpg"
+        
+        alt="Shoes 1"
+      />
+     
+       <img
+        @click="striped = true; shoes_no = 2; shoes = 'ALKE_Nella-20_Lapis_Calf_Birdseye'"
+        src="http://www.sauvereign.com/wp-content/uploads/2023/08/ALKE_Nella-20_Lapis_Calf_Birdseye_Personalisation_Empty_thumbnail_Web.jpg"
+        alt="Shoes 2"
+      />
+      </div>
+     
+    <div class="grid-content all">
+      <div class="hand-painted">
+        <h2>Hand-painting</h2>
+        <div class="selections">
+          <button
+            @click="selected_to_modify = 'left'"
+            :class="{active: selected_to_modify == 'left'}"
+          >
+            Left
+          </button>
+          <button
+            @click="selected_to_modify = 'right'"
+            :class="{active: selected_to_modify == 'right'}"
+          >
+            Right
+          </button>
+        </div>
+      </div>
+
+      <div class="grid-content paintings">
+        <div class="initials">
+            <div>Initials</div>
+          
+          <input
+            @change="striped = true;console.log(shoe_config,'shoe config after input')"
+            @keydown="striped = true"
+            type="text"
+            placeholder="INITIALS"
+            maxlength="1"
+            v-model="shoe_config[selected_to_modify].initial"
+          />
+        </div>
+        <div class="emojis">
+          Emojis
+          <p>
+            <img
+              @click="striped = true;  shoe_config[selected_to_modify].image = '01';console.log(shoe_config,'shoe config')"
+              :src="`https://www.sauvereign.com/wp-content/uploads/2022/11/pic-01-${shoes_no == 1 ? 'red' : 'white'}.png`"
+              alt="Emoji 1"
+            />
+            <img
+              @click="striped = true; shoe_config[selected_to_modify].initial = ''; shoe_config[selected_to_modify].image = '02'; "
+              :src="`https://www.sauvereign.com/wp-content/uploads/2022/11/pic-02-${shoes_no == 1 ? 'red' : 'white'}.png`"
+              alt="Emoji 2"
+            />
+            <img
+              @click="striped = true; shoe_config[selected_to_modify].initial = ''; shoe_config[selected_to_modify].image = '03'; "
+              :src="`https://www.sauvereign.com/wp-content/uploads/2022/11/pic-03-${shoes_no == 1 ? 'red' : 'white'}.png`"
+              alt="Emoji 3"
+            />
+            <img
+              @click="striped = true; shoe_config[selected_to_modify].initial = ''; shoe_config[selected_to_modify].image = '04'; "
+              :src="`https://www.sauvereign.com/wp-content/uploads/2022/11/pic-04-${shoes_no == 1 ? 'red' : 'white'}.png`"
+              alt="Emoji 4"
+            />
+          </p>
+        </div>
+      </div>
+      <div class="grid-content special-order">
+        <p>Special Order </p>
+        <p>
+          <img  
+            @click="striped = true; shoe_config[selected_to_modify].initial = ''; shoe_config[selected_to_modify].image = '05'; "
+            :src="`https://www.sauvereign.com/wp-content/uploads/2022/11/pic-05-${shoes_no == 1 ? 'red' : 'white'}.png`"
+            alt="Order 1" 
+          />
+          <img  
+            @click="striped = true; shoe_config[selected_to_modify].initial = ''; shoe_config[selected_to_modify].image = '06'; "
+            :src="`https://www.sauvereign.com/wp-content/uploads/2022/11/pic-06-${shoes_no == 1 ? 'red' : 'white'}.png`"
+            alt="Order 2"
+          />
+        </p>
+      </div>
+    </div>
+  </div> -->
+</div>
+
+<script src="https://unpkg.com/petite-vue"></script>
+
+
+<!-- 引入 boostrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<!-- 引入html2canvas -->
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script>
+  PetiteVue.createApp({
+    count: 0,
+    shoes: "ALKE_Jaffa-20_White_Calf_Birdseye",
+    striped: false,
+    shoes_no: 1,
+    initials: "",
+    selected_to_modify: "left",
+    shoe_config: {
+      left: {
+        image: "",
+        initial: ""
+      },
+      right: {
+        image: "",
+        initial: ""
+      }
+    },
+
+    processData(data, letter = 0) {
+      if (!letter && !data) {
+        this.shoes = `https://www.sauvereign.com/wp-content/uploads/2022/11/ALKE_Jaffa-20_White_Calf_Birdseye_Personalisation_Empty_Web-scaled.jpg`;
+        return;
+      }
+
+      if (letter === 1) {
+        const initial = this.initials.charAt(0).toUpperCase();
+
+        data = initial;
+      } else {
+        this.initials = "";
+      }
+
+      if (this.shoes_no == 1) {
+        this.shoes = `https://www.sauvereign.com/wp-content/uploads/2022/11/ALKE_Jaffa-20_White_Calf_Birdseye_Personalisation_${data}_Web-scaled.jpg`;
+      } else {
+        this.shoes = `https://www.sauvereign.com/wp-content/uploads/2022/11/ALKE_Nella-20_Lapis_Calf_Birdseye_Personalisation_${data}_Web-scaled.jpg`;
+      }
+    },
+   saveView(){
+    // 獲取要截取屏幕的容器元素
+    // const container = document.querySelector('.preview')
+    // console.log(container,'container');
+    // 創建一個用於繪製截圖的canvas元素
+    // const canvas = document.createElement('canvas')
+    // const context = canvas.getContext('2d')
+
+    // 設置canvas的尺寸與容器相同
+    // canvas.width = container.offsetWidth
+    // canvas.height = container.offsetHeight
+
+    // 在canvas上繪製容器的內容
+    // context.drawImage(container,0,0)
+
+    // 講截屏轉換為圖像url
+    // const dataURL = canvas.toDataURL('image/png')
+    // console.log(dataURL,'dataURL');
+  
+    html2canvas(document.body).then(canvas=>{
+      document.body.appendChild(canvas)
+      console.log(canvas,'canvas');
+      // // 講截屏轉換為圖像url
+      // const dataURL = canvas.toDataURL('image/png')
+
+      //   console.log(dataURL,'dataurl');
+        // // 創建一個臨時的a元素來觸發下載
+        //      const link = document.createElement('a')
+        //      link.href= dataURL
+        //      link.download = 'screenshot.png'
+
+        //     //  模擬點擊下載鏈接
+        //     link.click()
+    })
+   }
+  }).mount("#app");
+</script>
+
+<style>
+  #app * {
+    font-family: sans-serif;
+    color: #575757;
+  }
+  #app {
+    display: flex;
+    justify-content: start;
+    margin: auto;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  #app .preview {
+    max-width: 510px;
+    margin: auto;
+    aspect-ratio: 1/1;
+    position: relative;
+  }
+
+  #app .preview img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  #app .preview img.letters-text {
+    padding: 24%;
+    box-sizing: border-box;
+    transform: scale(1.9);
+  }
+
+  #app .preview .content-left,
+  #app .preview .content-right {
+    width: 7%;
+    position: absolute;
+    /* top: 45.4%; */
+    top:43.4%;
+  }
+
+  #app .preview.config_2 .content-left,
+  #app .preview.config_2 .content-right {
+    width: 7%;
+    position: absolute;
+    top: 45.9%;
+  }
+
+  #app .preview .content-left {
+    left: 36.3%;
+  }
+
+  #app .preview .content-right {
+    left: 56.5%;
+  }
+
+  #app .preview.config_2 .content-left img {
+    transform: rotate(5deg);
+  }
+
+  #app .preview.config_2 .content-right img {
+    transform: rotate(-6deg);
+  }
+
+  #app .preview.config_2 .content-left img.letters-text {
+    transform: scale(1.9) rotate(5deg);
+  }
+
+  #app .preview.config_2 .content-right img.letters-text {
+    transform: scale(1.9) rotate(-6deg);
+  }
+
+  #app .preview.config_2 .content-right {
+    left: 57%;
+  }
+
+  #app .preview .content-right img,
+  #app .preview .content-left img,
+  #app .preview .content-right h2,
+  #app .preview .content-left h2 {
+    mix-blend-mode: multiply;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  #app .preview.config_2 .content-right img,
+  #app .preview.config_2 .content-left img,
+  #app .preview.config_2 .content-right h2,
+  #app .preview.config_2 .content-left h2 {
+    mix-blend-mode: normal;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  #app .preview .content-right h2,
+  #app .preview .content-left h2 {
+    text-align: center;
+    font-size: 250%;
+    margin: 0;
+    margin-top: 18%;
+  }
+
+  #app .grid {
+    display: flex;
+    flex-direction: row;
+    padding-top: 1vh;
+  }
+
+  #app .grid > div {
+    width: 33.33%;
+    padding: 20px;
+    padding-top: 0;
+    border-right: 1px solid rgb(179, 179, 179);
+  }
+
+  #app .grid > div.grid-content.all {
+    width: 66.66%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+  }
+
+ @media screen and (min-width: 600px) {
+     #app .grid > div.grid-content.all > .hand-painted {
+    width: 100%;
+    flex: 0 0 100%;
+    padding: 20px;
+    padding-top: 0;
+    padding-left:16.5vw;
+  }
+ }
+  
+  
+  @media screen and (min-width: 1200px) {
+     #app .grid > div.grid-content.all > .hand-painted {
+    width: 100%;
+    flex: 0 0 100%;
+    padding: 20px;
+    padding-top: 0;
+    padding-left:270px;
+  }
+}
+@media screen and (min-width: 600px) {
+   #app .grid > div.grid-content.all > .hand-painted h2 {
+       margin-top: 0!important;
+      margin-bottom: 0!important;
+    display: inline-block;
+    width: auto;
+    margin-left: 24px;
+   }}
+    @media screen and (min-width: 700px) {
+   #app .grid > div.grid-content.all > .hand-painted h2 {
+       margin-left: 36px;
+   }}
+    @media screen and (min-width: 800px) {
+   #app .grid > div.grid-content.all > .hand-painted h2 {
+       margin-left: 50px;
+   }}
+    @media screen and (min-width: 900px) {
+   #app .grid > div.grid-content.all > .hand-painted h2 {
+       margin-left: 64px;
+   }}
+     @media screen and (min-width: 1000px) {
+   #app .grid > div.grid-content.all > .hand-painted h2 {
+       margin-left: 78px;
+   }}
+   
+   @media screen and (min-width: 1100px) {
+   #app .grid > div.grid-content.all > .hand-painted h2 {
+       margin-left: 92px;
+   }}
+   
+   @media screen and (min-width: 1200px) {
+  #app .grid > div.grid-content.all > .hand-painted h2 {
+   margin-left: 30px;
+    
+  }}
+
+  #app .grid > div.grid-content.all > .grid-content {
+    width: 54%;
+    flex: 0 0 calc(54% - 80px);
+    padding: 20px;
+  }
+
+  #app .grid > div.grid-content.all > .grid-content:nth-child(2) {
+    border-right: 1px solid rgb(179, 179, 179);
+    width: 45%;
+    flex: 0 0 45%;
+    padding-top: 20px;
+  }
+  
+  @media screen and (max-width: 600px){
+      #app .grid > div.grid-content.all > .grid-content:nth-child(2){
+           padding-top: 64px;
+      }
+  }
+
+  #app .grid > div:nth-last-child(1) {
+    border-right: 0;
+  }
+
+  #app .grid > div h2 {
+    font-size: 20px;
+    font-weight: normal;
+    font-family: Palatino;
+  }
+  @media screen and (max-width: 600px) {
+      #app .grid>div:first-child{
+          padding-bottom: 50px;
+      }
+  }
+  
+   @media screen and (max-width: 600px) {
+      #app .shoes-selection h2:first-child{
+      padding-left:1px;
+      margin-bottom: -31px;
+  }
+  }
+  #app .shoes-selection h2{
+      margin-top: 0!important;
+      padding-left: 10.2vw;
+  }
+  
+  
+  
+  
+  
+   @media screen and (min-width: 1200px) {
+        #app .shoes-selection h2{
+      margin-top: 0!important;
+      padding-left: 146px;
+  }
+   }
+   
+   #app .shoes-selection img {
+    border: 1px dashed transparent;
+    width: 150px;
+    padding: 5px;
+    margin-top: 56px
+  }
+  @media screen and (max-width: 600px) {
+      #app .shoes-selection img {
+          margin-top: 30px;
+      }
+  }
+ @media screen and (min-width: 1200px) {
+     #app .shoes-selection img {
+         width: 170px;
+     }
+ }
+  #app .shoes-selection img:hover {
+    opacity: 0.8;
+    border: 1px dashed orange;
+    cursor: pointer;
+  }
+
+  /*#app .hand-painted {*/
+  /*  display: flex;*/
+  /*  align-items: baseline;*/
+  /*}*/
+
+  #app .hand-painted h2 {
+    width: 100%;
+  }
+  
+  @media screen and (max-width: 600px) {
+      #app .hand-painted h2{
+          margin-top: 66px;
+          margin-bottom: 21px;
+      }
+  }
+  
+
+
+  #app .hand-painted .selections {
+    min-width: 130px;
+    text-align: left;
+  }
+@media screen and (min-width: 100px) {
+    #app .hand-painted .selections {
+    min-width: 130px;
+    padding-left: 23vw;
+    text-align: left;
+  }
+}
+@media screen and (min-width: 200px) {
+      #app .hand-painted .selections {
+          padding-left:18vw;
+      }}
+@media screen and (min-width: 300px) {
+      #app .hand-painted .selections {
+          padding-left:24vw;
+      }}
+@media screen and (min-width: 400px) {
+      #app .hand-painted .selections {
+          padding-left:29vw;
+      }}
+@media screen and (min-width: 500px) {
+      #app .hand-painted .selections {
+          padding-left:34vw;
+      }}
+@media screen and (min-width: 600px) {
+      #app .hand-painted .selections {
+          padding-left:0px;
+      }}
+      @media screen and (min-width: 700px) {
+      #app .hand-painted .selections {
+          padding-left:11px;
+      }}
+ @media screen and (min-width: 800px) {
+      #app .hand-painted .selections {
+          padding-left:26px;
+      }}
+  @media screen and (min-width: 900px) {
+      #app .hand-painted .selections {
+          padding-left:40px;
+      }}
+  @media screen and (min-width: 1000px) {
+      #app .hand-painted .selections {
+          padding-left: 53px;
+      }}
+       @media screen and (min-width: 1100px) {
+      #app .hand-painted .selections {
+          padding-left: 67px;
+      }}
+      
+ @media screen and (min-width: 1200px) {
+      #app .hand-painted .selections {
+    padding-left: 7px;
+  }
+
+ }
+  #app .hand-painted .selections button {
+    background-color: transparent;
+    color: #d1a543 !important;
+    border: 0;
+    /*border-radius: 6px;*/
+    border-radius: 50px 25px;
+    padding: 3px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #FEBD2D;
+  }
+  
+  #app .hand-painted .selections button:first-child{
+       padding: 3px 26px;
+  }
+
+  #app .hand-painted .selections button.active,
+  #app .hand-painted .selections button:hover {
+    background-color: #FEBD2D;
+    color: white !important;
+  }
+
+  #app .initials {
+    margin: 0;
+  }
+@media screen and (min-width: 1200px) {
+    #app .initials {
+    margin-bottom: 0;
+  }
+}
+  #app .initials input {
+    width: 34%;
+    background-color: rgb(242, 242, 242);
+    color: black;
+    border: 0;
+    font-size: 16px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    outline: 0;
+    margin: 5px 0;
+  }
+
+
+  #app .emojis img {
+    border: 1px dashed transparent;
+    width: 70px;
+    padding: 5px;
+  }
+  @media screen and (min-width: 1200px) {
+    #app .emojis img {
+        width: 65px;
+    }
+}
+  #app .emojis img:hover {
+    opacity: 0.8;
+    border: 1px dashed orange;
+    cursor: pointer;
+  }
+
+
+  #app .special-order img {
+    border: 1px dashed transparent;
+    width: 130px;
+    padding: 5px;
+  }
+
+  #app .special-order img:hover {
+    opacity: 0.8;
+    border: 1px dashed orange;
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: 600px) {
+    #app .grid {
+      flex-direction: column;
+    }
+    #app .grid > div {
+      width: 100% !important;
+      border-right: 0;
+      border-bottom: 1px solid rgb(179, 179, 179);
+      text-align: center;
+    }
+
+    #app .grid > div:nth-last-child(1) {
+      border-bottom: 0;
+    }
+
+    #app .grid > div.grid-content.all {
+      width: 66.66%;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+    }
+   
+
+    #app .grid > div.grid-content.all > .hand-painted {
+      width: 100% !important;
+      flex: 0 0 100% !important;
+    }
+
+    #app .grid > div.grid-content.all > .grid-content {
+      width: 100% !important;
+      flex: 0 0 calc(100% - 80px) !important;
+      padding: 20px;
+    }
+    
+    
+  }
+  p{
+      /*margin-left: 36px*/
+  }
+  @media screen and (max-width: 600px) {
+       .emojis{
+     margin-top: 60px
+ }
+  }
+  
+  .accordion-button:focus{
+    border-color:transparent;
+    box-shadow: none;
+  }
+  .accordion-button:not(.collapsed){
+    background-color: transparent;
+    border-color:transparent;
+  }
+  
+  
+</style>
