@@ -18,21 +18,57 @@
         .accordion-collapse .btn.active{
             border:1px solid orange;
         }
+        .accordion-button:not(.collapsed),.accordion-button{
+            color: #6E550F;
+        }
+        .accordion-button{
+            flex-direction: column;
+            padding-bottom: 5px;
+        }
+        .accordion-button::after{
+            margin-left: inherit;
+        }
+        .accordion-button::after{
+            margin-top: 9px;
+        }
+        .accordion-button:focus{
+            box-shadow: none;
+        }
+        .accordion-button:not(.collapsed){
+            /* background-color: ; */
+        }
+        .nav-item{
+            width:50%;
+        }
+        .nav-tabs .nav-link{
+            border-top-left-radius:0;
+            border-top-right-radius:0;
+            width:100%;
+            background-color: white;
+            color: #d1a543;
+            border: 1px solid #d1a543;
+        }
+        .nav-tabs .nav-link.active{
+            background-color: #D1a543;
+            color:white;
+            border: 1px solid #d1a543;
+        }
+        
     </style>
 </head>
 <body>
     <div >
         <div class="row">
             <div class="preview col-xl-8 col-lg-8 col-12">
-                <img src="./assets/ALKE_Jaffa-20_White_Calf_Birdseye_Personalisation_Empty_thumbnail_Web.png" alt="">
+                <img src="https://www.sauvereign.com/wp-content/uploads/2023/11/ALKE_Jaffa-20_White_Calf_Birdseye_Personalisation_Empty_thumbnail_Web.png" alt="">
             </div>
             <div class="panel col-xl-4 col-lg-4 col-12 ">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Left</button>
+                      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">LEFT</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Right</button>
+                      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">RIGHT</button>
                     </li>
                    
                   </ul>
@@ -104,8 +140,8 @@
                     </div>
 
                     <!-- Right Tab -->
-                    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-                        <div class="accordion accordion-flush rightAccordion" id="accordionFlushExample">
+                    <div class="tab-pane fade Right" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                        <div class="accordion accordion-flush leftAccordion" id="accordionFlushExample">
                             <!-- Initial Tab -->
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
@@ -116,7 +152,9 @@
                                 <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                                   <div class="accordion-body">
                                       <div class="input-group mb-3">
-                                          <input type="text" class="form-control" placeholder="Left Initial" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                          <input type="text" class="form-control" placeholder="Right Initial,Letters Only" aria-label="Recipient's username" aria-describedby="basic-addon2"
+                                          maxlength="1"
+                                          pattern="[A-Za-z]">
                                         </div>
                                   </div>
                                 </div>
@@ -130,14 +168,17 @@
                                 </h2>
                                 <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                                   <div class="accordion-body ">
-                                        <button type="button" class="btn ">
-                                            <img src="https://sauvereign.com/wp-content/uploads/2022/11/pic-01-red.png" class="emoji_btn">
+                                        <button type="button" class="btn " value="emoji-01">
+                                            <img src="https://www.sauvereign.com/wp-content/uploads/2024/01/emoji-01.png" class="emoji_btn">
                                         </button>
-                                        <button type="button" class="btn ">
-                                            <img src="https://sauvereign.com/wp-content/uploads/2022/11/pic-02-red.png" class="emoji_btn">
+                                        <button type="button" class="btn " value="emoji-02">
+                                            <img src="https://www.sauvereign.com/wp-content/uploads/2024/01/emoji-02.png" class="emoji_btn">
                                         </button>
-                                        <button type="button" class="btn">
-                                            <img src="https://sauvereign.com/wp-content/uploads/2022/11/pic-03-red.png" class="emoji_btn">
+                                        <button type="button" class="btn" value="emoji-03">
+                                            <img src="https://www.sauvereign.com/wp-content/uploads/2024/01/emoji-03.png" class="emoji_btn">
+                                        </button>
+                                        <button type="button" class="btn" value="emoji-04">
+                                            <img src="https://www.sauvereign.com/wp-content/uploads/2024/01/emoji-04.png" class="emoji_btn">
                                         </button>
                                   </div>
                                 </div>
@@ -145,27 +186,27 @@
                               <!-- Special Order Tab -->
                               <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
                                     SPECIAL ORDERS
                                   </button>
                                 </h2>
-                                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                                   <div class="accordion-body ">
-                                        <button type="button" class="btn ">
-                                            <img src="https://sauvereign.com/wp-content/uploads/2022/11/pic-01-red.png" class="emoji_btn">
-                                        </button>
-                                        <button type="button" class="btn ">
-                                            <img src="https://sauvereign.com/wp-content/uploads/2022/11/pic-02-red.png" class="emoji_btn">
-                                        </button>
-                                        <button type="button" class="btn active">
-                                            <img src="https://sauvereign.com/wp-content/uploads/2022/11/pic-03-red.png" class="emoji_btn">
-                                        </button>
+                                    <button type="button" class="btn " value="spe-01">
+                                        <img src="https://www.sauvereign.com/wp-content/uploads/2024/01/spe-01.png" class="emoji_btn">
+                                    </button>
+                                    <button type="button" class="btn " value="spe-02">
+                                        <img src="https://www.sauvereign.com/wp-content/uploads/2024/01/spe-02.png" class="emoji_btn">
+                                    </button>
                                   </div>
                                 </div>
                               </div>
                           </div>
                     </div>
                     
+                    <div class="d-grid gap-2">
+                        <button class="btn save-btn" type="button">Save Image</button>
+                      </div>
                   </div>
             </div>
         </div>
@@ -191,8 +232,11 @@
         console.log(obj,'obj');
 
         let leftUrl =`https://www.sauvereign.com/wp-content/uploads/2024/01/${obj.left}.png`
+
         let rightUrl =`https://www.sauvereign.com/wp-content/uploads/2024/01/${obj.right}.png`
-        console.log(obj.left.length,'obj.left.length');
+        console.log(obj.left,'obj.left');
+        console.log(leftUrl,'leftUrl');
+        
 
         if(obj.left===''||obj.right===''){
                     console.log('只選了一遍');
@@ -207,7 +251,7 @@
                     }else{
                         mergeImages([
                         {src:'https://www.sauvereign.com/wp-content/uploads/2023/11/ALKE_Jaffa-20_White_Calf_Birdseye_Personalisation_Empty_thumbnail_Web.png',x:0,y:0},
-                        {src:rightUrl,x:350,y:300},
+                        {src:rightUrl,x:430,y:300},
                         ],{crossOrigin:"anonymous"}).then(b64=>{
                     document.querySelector('.preview img').src=b64
                 })
@@ -217,40 +261,14 @@
         }else{
                    // 兩邊都有定制的時候，需要合成4幅圖像（鞋圖，帶圖，圖案或字圖x2）
                    console.log('two sides');
+                   mergeImages([
+                        {src:'https://www.sauvereign.com/wp-content/uploads/2023/11/ALKE_Jaffa-20_White_Calf_Birdseye_Personalisation_Empty_thumbnail_Web.png',x:0,y:0},
+                        {src:leftUrl,x:250,y:300},
+                        {src:rightUrl,x:430,y:300},
+                        ],{crossOrigin:"anonymous"}).then(b64=>{
+                    document.querySelector('.preview img').src=b64
+                })
         }
-
-
-        // for(let k in obj){
-        //     // console.log(obj[k],'objk');
-        //     if(obj[k]){
-                
-        //         if(k==='leftEmoji'&&obj[k]==='emoji01'){
-        //             mergeImages([
-        //                 {src:'https://www.sauvereign.com/wp-content/uploads/2023/11/ALKE_Jaffa-20_White_Calf_Birdseye_Personalisation_Empty_thumbnail_Web.png',x:0,y:0},
-        //                 {src:'https://sauvereign.com/wp-content/uploads/2022/11/pic-01-red.png',x:250,y:300},
-        //                 ],{crossOrigin:"anonymous"}).then(b64=>{
-        //             document.querySelector('.preview img').src=b64
-        //         })
-        //         }else if(k==='leftEmoji'&&obj[k]==='emoji02'){
-        //             mergeImages([
-        //                 {src:'https://www.sauvereign.com/wp-content/uploads/2023/11/ALKE_Jaffa-20_White_Calf_Birdseye_Personalisation_Empty_thumbnail_Web.png',x:0,y:0},
-        //                 {src:'https://sauvereign.com/wp-content/uploads/2022/11/pic-02-red.png',x:250,y:300},
-        //                 ],{crossOrigin:"anonymous"}).then(b64=>{
-        //             document.querySelector('.preview img').src=b64
-        //         })
-        //         }else if(k==='leftInitial'){
-        //             console.log(k,obj[k],'k');
-        //             mergeImages([
-        //                 {src:'https://www.sauvereign.com/wp-content/uploads/2023/11/ALKE_Jaffa-20_White_Calf_Birdseye_Personalisation_Empty_thumbnail_Web.png',x:0,y:0},
-        //                 {src:`https://www.sauvereign.com/wp-content/uploads/2022/10/letter_${obj[k]}_red.png`,x:250,y:300},
-        //                 ],{crossOrigin:"anonymous"}).then(b64=>{
-        //             document.querySelector('.preview img').src=b64
-        //         })
-        //         }
-                
-        //     }
-        // }
-
                  
      }
 
@@ -273,19 +291,48 @@
                     this.classList.add('active')
 
                     // 不管文本框有沒有輸入，都清空輸入
-                    document.querySelector('input[placeholder="Left Initial"]').value=''
+                    document.querySelector('input[placeholder="Left Initial,Letters Only"]').value=''
 
-                    
                     shoePersonalization.left=this.value
                     console.log(shoePersonalization,'shoePersonalization');
 
                     // 合成圖像
                     mergeImage(shoePersonalization)
-
-
                    })
-
           }
+
+
+    //  獲取右鞋的所有按鈕
+    const rightBtns=document.querySelectorAll('.Right .accordion-collapse .btn')
+          console.log(leftBtns,'btns');
+        //   為左鞋的所有按鈕綁定點擊事件
+          for(let i=0;i<leftBtns.length;i++){
+                   rightBtns[i].addEventListener('click',function(){
+                    console.log(this.value,'this.value');
+                    // 清除現有邊框
+                    if(document.querySelector('.Right .accordion-collapse .btn.active')){
+
+                        document.querySelector('.Right .accordion-collapse .btn.active').classList.remove('active')
+                    }
+                    
+                    
+                    // 自己添加邊框
+                    this.classList.add('active')
+
+                    // 不管文本框有沒有輸入，都清空輸入
+                    document.querySelector('input[placeholder="Right Initial,Letters Only"]').value=''
+
+                    shoePersonalization.right=this.value
+                    console.log(shoePersonalization,'shoePersonalization');
+
+                    // 合成圖像
+                    mergeImage(shoePersonalization)
+                   })
+          }
+
+
+
+
 
     // 獲取左鞋的文本框
           const leftTxt=document.querySelector('.Left input')
@@ -301,34 +348,51 @@
                     let letter = e.target.value.toLowerCase()
                     shoePersonalization.left=`letter_${letter}_red`
                     console.log(shoePersonalization,'shoePersonalization');
+                    // 合成圖像
+                    mergeImage(shoePersonalization)
                   }else{
                     // 如果輸入其他字符，清空文本框
                     leftTxt.value=''
                   }
         })
 
+         // 獲取右鞋的文本框
+         const rightTxt=document.querySelector('.Right input')
+
+//   為右鞋的文本框綁定變化事件
+        rightTxt.addEventListener('input',function(e){
+                  console.log(e.target.value,'e.target.value');
+                //   正則表達式
+                const regex = /^[A-Za-z]+$/
+        
+                  if(regex.test(e.target.value)){
+                    // 如果輸入了字母
+                    let letter = e.target.value.toLowerCase()
+                    shoePersonalization.right=`letter_${letter}_red`
+                    console.log(shoePersonalization,'shoePersonalization');
+                    // 合成圖像
+                    mergeImage(shoePersonalization)
+                  }else{
+                    // 如果輸入其他字符，清空文本框
+                    rightTxt.value=''
+                  }
+        })
+
      
-    //  document.querySelector('label[for="left_emoji02"]').addEventListener('click',function(){
-    //     // 清除別人的邊框
-    //     document.querySelector('label[for="left_emoji01"]').style.border='none'
-    //     // 顯示邊框
-    //     this.style.border = '1px solid #d1a543'
+        // 為save btn綁定事件
+        document.querySelector('.save-btn').addEventListener('click',function(){
+              
+            console.log(document.querySelector('.preview img').src,`document.querySelector('.preview img').src`);
 
-    //     // 清空其他所有已選的值
-    //     document.querySelector('input[placeholder="Left Initial"]').value=''
+            const link = document.createElement('a')
+            link.href = document.querySelector('.preview img').src
+            link.download = 'screenshot.png'
 
-    //     // 之前的定制選項清空
-    //     shoePersonalization.leftInitial=''
-    //     //   更改鞋的定制選項
-    //       shoePersonalization.leftEmoji='emoji02'
-
-    //     console.log(shoePersonalization,'sp');
-
-    //     //   合成圖像
-    //         mergeImage(shoePersonalization)
+            link.click()
 
 
-    //  })
+        })
+  
 
 
 
