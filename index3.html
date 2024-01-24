@@ -7,10 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
         .preview{
-            background-color:#D1a543;
+            /* background-color:#D1a543; */
+            text-align: center;
         }
         .panel{
-            background-color: gold;
+            /* background-color: gold; */
+            border-left: 1px solid #D1A543;
         }
         .emoji_btn{
             width: 60px;
@@ -35,7 +37,7 @@
             box-shadow: none;
         }
         .accordion-button:not(.collapsed){
-            /* background-color: ; */
+            background-color: rgba(209, 165, 67, 0.5);
         }
         .nav-item{
             width:50%;
@@ -52,6 +54,9 @@
             background-color: #D1a543;
             color:white;
             border: 1px solid #d1a543;
+        }
+        .row>* {
+            padding-left: 0px;
         }
         
     </style>
@@ -206,6 +211,7 @@
                     
                     <div class="d-grid gap-2">
                         <button class="btn save-btn" type="button">Save Image</button>
+                        <a href="#" class="share"></a>
                       </div>
                   </div>
             </div>
@@ -382,13 +388,19 @@
         // 為save btn綁定事件
         document.querySelector('.save-btn').addEventListener('click',function(){
               
-            console.log(document.querySelector('.preview img').src,`document.querySelector('.preview img').src`);
+          console.log(document.querySelector('.preview img').src,`document.querySelector('.preview img').src`);
 
-            const link = document.createElement('a')
-            link.href = document.querySelector('.preview img').src
-            link.download = 'screenshot.png'
+                // const link = document.createElement('a')
+                // link.href = document.querySelector('.preview img').src
+                // console.log(link.href,'link.href');
+                // link.download = 'screenshot.png'
+                // link.click()
+               const urlEncode = encodeURIComponent(document.querySelector('.preview img').src)
 
-            link.click()
+                document.querySelector('.share').href = `https://api.whatsapp.com/send?phone=447760111054&text=${urlEncode}`
+
+                document.querySelector('.share').click()
+                
 
 
         })
